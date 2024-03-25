@@ -155,4 +155,4 @@ MonoBehaviour:
   _collider: {fileID: 8561838667176853394}
   _explosionLayerMask:
     serializedVersion: 2
-    m_Bits: 115
+    m_Bits: 243

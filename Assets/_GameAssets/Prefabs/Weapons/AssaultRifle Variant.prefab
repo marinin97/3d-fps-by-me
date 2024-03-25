@@ -162,7 +162,7 @@ MonoBehaviour:
   <WeaponSettings>k__BackingField: {fileID: 11400000, guid: 58226fdc1ee97434da6c29e573c9d8b2, type: 2}
   _shootRayLayerMask:
     serializedVersion: 2
-    m_Bits: 115
+    m_Bits: 243
   _bulletPrefab: {fileID: 1619762015232146719, guid: c9e0f06804642b64f98746e155a47f89, type: 3}
   _shootPointTransform: {fileID: 556867441812137963}
   _muzzleFlash: {fileID: 5809463381434295461}

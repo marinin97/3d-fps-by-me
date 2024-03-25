@@ -136,5 +136,5 @@ MonoBehaviour:
   <WeaponSettings>k__BackingField: {fileID: 11400000, guid: b86a3be62a4bc1f459543a5fa6368acf, type: 2}
   _shootRayLayerMask:
     serializedVersion: 2
-    m_Bits: 115
+    m_Bits: 243
   _attackRadius: 1

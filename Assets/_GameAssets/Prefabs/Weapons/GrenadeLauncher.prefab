@@ -164,7 +164,7 @@ MonoBehaviour:
   <WeaponSettings>k__BackingField: {fileID: 11400000, guid: 3a3445aa365c5634fa208e25d0760dbb, type: 2}
   _shootRayLayerMask:
     serializedVersion: 2
-    m_Bits: 115
+    m_Bits: 243
   _grenadePrefab: {fileID: 5987625670073031690, guid: f4da0e38072aaa549b6d1693487ac278, type: 3}
   _shootPointTransform: {fileID: 2173875737872993141}
 --- !u!95 &8128150704614196790

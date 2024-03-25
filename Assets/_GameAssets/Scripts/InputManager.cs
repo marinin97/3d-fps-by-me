@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
 
     public event Action OnReload;
     public event Action OnUse;
+    public event Action OnFlash;
     public event Action<int> OnWeaponChange;
     public event Action<bool> OnFire; //send FireIsPressed
     public event Action OnFireStarted;
@@ -36,6 +37,12 @@ public class InputManager : MonoBehaviour
         _controls.PlayerMap.Reload.performed += ReloadPerformed;
         _controls.PlayerMap.WeaponChange.performed += WeaponChangePerformed;
         _controls.PlayerMap.Use.performed += UsePerformed;
+        _controls.PlayerMap.Flash.performed += FlashPerformed;
+    }
+
+    private void FlashPerformed(InputAction.CallbackContext context)
+    {
+        OnFlash?.Invoke();
     }
 
     private void UsePerformed(InputAction.CallbackContext context)

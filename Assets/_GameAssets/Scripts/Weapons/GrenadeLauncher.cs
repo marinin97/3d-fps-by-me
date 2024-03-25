@@ -88,7 +88,7 @@ public class GrenadeLauncher : Weapon
 
     public override void Shoot(bool fireIsPressed, Transform cameraTransform)
     {
-        if (_timeBeforeShoot > 0 || IsReloading)
+        if (_timeBeforeShoot > 0 || IsReloading || fireIsPressed)
         {
             return;
         }

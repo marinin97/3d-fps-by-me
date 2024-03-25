@@ -37,16 +37,21 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField]
     private float _minCameraPitch;
 
-    //[Header("E TEXT")]
-    //[SerializeField]
-    //private TMP_Text _useText;
-    //[SerializeField]
-    //private float _maxUseDistance = 5f;
-    //[SerializeField]
-    //private LayerMask _useLayers;
+    [Header("E TEXT")]
+    [SerializeField]
+    private TMP_Text _useText;
+    [SerializeField]
+    private float _maxUseDistance = 5f;
+    [SerializeField]
+    private LayerMask _useLayers;
 
     [field: SerializeField]
     public WeaponChanger WeaponChanger { get; private set; }
+
+    [Header("---------Flash---------")]
+    [SerializeField]
+    private GameObject _flashLight;
+    private bool _isOn = true;
 
     private InputManager _inputManager;
     private Transform _transform;
@@ -58,11 +63,16 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void Awake()
     {
         Health = MaxHealth;
-        _inputManager = InputManager.Instance;
+        _inputManager = FindObjectOfType<InputManager>();
+        if (_inputManager == null)
+        {
+            Debug.Log("HUY!");
+        }
         _inputManager.OnFire += Fire;
         _inputManager.OnReload += Reload;
         _inputManager.OnWeaponChange += ChangeWeapon;
-       // _inputManager.OnUse += OnUseClicked;
+        _inputManager.OnUse += OnUseClicked;
+        _inputManager.OnFlash += OnFlashClicked;
 
         _transform = _characterController.transform;
         _cameraTransform = _cameraTransform != null ? _cameraTransform : Camera.main.transform;
@@ -72,6 +82,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         WeaponChanger.OnWeaponChanged += HandleWeaponChange;
         WeaponChanger.ChangeWeapon(0);
     }
+
+
     private void Start()
     {
         OnHealthChanged?.Invoke(Health);
@@ -119,7 +131,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         Jump();
         _characterController.Move(_playerVelocity * Time.deltaTime);
 
-       // OnUseSetText();
+        OnUseSetText();
+       // OnFlashClicked();
     }
 
     private void Rotate()
@@ -193,47 +206,57 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
 
-    //public void OnUseClicked()
-    //{
-    //    Debug.Log("E button pressed");
-    //    if (Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, _maxUseDistance, _useLayers))
-    //    {
-    //        if (hit.collider.TryGetComponent<Door>(out Door door))
-    //        {
-    //            if (door.IsOpen)
-    //            {
-    //                door.Close();
-    //            }
-    //            else
-    //            {
-    //                door.Open(_transform.position);
-    //            }
-    //        }
-    //    }
-    //}
+    public void OnUseClicked()
+    {
+        Debug.Log("E button pressed");
+        if (Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, _maxUseDistance, _useLayers))
+        {
+            if (hit.collider.TryGetComponent<Door>(out Door door))
+            {
+                if (door.IsOpen)
+                {
+                    door.Close();
+                }
+                else
+                {
+                    door.Open(_transform.position);
+                }
+            }
+        }
+    }
 
-    //private void OnUseSetText()
-    //{
-    //    if (Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, _maxUseDistance, _useLayers)
-    //       && hit.collider.TryGetComponent<Door>(out Door door))
-    //    {
-    //        if (door.IsOpen)
-    //        {
-    //            _useText.SetText("Close \"E\"");
-    //        }
-    //        else
-    //        {
-    //            _useText.SetText("Open \"E\"");
-    //        }
+    private void OnUseSetText()
+    {
+        if (Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, _maxUseDistance, _useLayers)
+           && hit.collider.TryGetComponent<Door>(out Door door))
+        {
+            if (door.IsOpen)
+            {
+                _useText.SetText("Close \"E\"");
+            }
+            else
+            {
+                _useText.SetText("Open \"E\"");
+            }
 
-    //        _useText.gameObject.SetActive(true);
-    //        _useText.transform.position = hit.point - (hit.point - _cameraTransform.position).normalized * 0.01f;
-    //        _useText.transform.rotation = Quaternion.LookRotation((hit.point - _cameraTransform.position).normalized);
-    //    }
-    //    else
-    //    {
-    //        _useText.gameObject.SetActive(false);
-    //    }
-    //}
-
+            _useText.gameObject.SetActive(true);
+            _useText.transform.position = hit.point - (hit.point - _cameraTransform.position).normalized * 0.1f;
+            _useText.transform.rotation = Quaternion.LookRotation((hit.point - _cameraTransform.position).normalized);
+        }
+        else
+        {
+            _useText.gameObject.SetActive(false);
+        }
+    }
+    private void OnFlashClicked()
+    {
+        if (!_flashLight.activeSelf)
+        {
+            _flashLight.SetActive(true);
+        }
+        else
+        {
+            _flashLight.SetActive(false);
+        }
+    }
 }

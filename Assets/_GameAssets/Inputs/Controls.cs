@@ -89,6 +89,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Flash"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b1ce481-e5f5-462a-865f-c0a1d51d47ff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -293,11 +302,22 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2a080806-e584-4e01-af11-2dfae3a1e39a"",
-                    ""path"": ""<Keyboard>/t"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e69fa4c-bed3-450f-a101-eea07de686fb"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -315,6 +335,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_PlayerMap_Reload = m_PlayerMap.FindAction("Reload", throwIfNotFound: true);
         m_PlayerMap_WeaponChange = m_PlayerMap.FindAction("WeaponChange", throwIfNotFound: true);
         m_PlayerMap_Use = m_PlayerMap.FindAction("Use", throwIfNotFound: true);
+        m_PlayerMap_Flash = m_PlayerMap.FindAction("Flash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -383,6 +404,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMap_Reload;
     private readonly InputAction m_PlayerMap_WeaponChange;
     private readonly InputAction m_PlayerMap_Use;
+    private readonly InputAction m_PlayerMap_Flash;
     public struct PlayerMapActions
     {
         private @Controls m_Wrapper;
@@ -394,6 +416,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Reload => m_Wrapper.m_PlayerMap_Reload;
         public InputAction @WeaponChange => m_Wrapper.m_PlayerMap_WeaponChange;
         public InputAction @Use => m_Wrapper.m_PlayerMap_Use;
+        public InputAction @Flash => m_Wrapper.m_PlayerMap_Flash;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -424,6 +447,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Use.started += instance.OnUse;
             @Use.performed += instance.OnUse;
             @Use.canceled += instance.OnUse;
+            @Flash.started += instance.OnFlash;
+            @Flash.performed += instance.OnFlash;
+            @Flash.canceled += instance.OnFlash;
         }
 
         private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -449,6 +475,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Use.started -= instance.OnUse;
             @Use.performed -= instance.OnUse;
             @Use.canceled -= instance.OnUse;
+            @Flash.started -= instance.OnFlash;
+            @Flash.performed -= instance.OnFlash;
+            @Flash.canceled -= instance.OnFlash;
         }
 
         public void RemoveCallbacks(IPlayerMapActions instance)
@@ -475,5 +504,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnWeaponChange(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+        void OnFlash(InputAction.CallbackContext context);
     }
 }

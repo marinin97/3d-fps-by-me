@@ -51,7 +51,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     [Header("---------Flash---------")]
     [SerializeField]
     private GameObject _flashLight;
-    private bool _isOn = true;
 
     private InputManager _inputManager;
     private Transform _transform;

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4572e5c1ac54334fb835da6d81cdbd5, type: 3}
   m_Name: GrenadeLauncher
   m_EditorClassIdentifier: 
-  <TotalAmmo>k__BackingField: 100
-  <MagazineAmmo>k__BackingField: 10
+  <TotalAmmo>k__BackingField: 999
+  <MagazineAmmo>k__BackingField: 999
   <HitDistance>k__BackingField: 5
-  <Damage>k__BackingField: 30
+  <Damage>k__BackingField: 100
   <ShootDelay>k__BackingField: 1
   <ReloadTime>k__BackingField: 1

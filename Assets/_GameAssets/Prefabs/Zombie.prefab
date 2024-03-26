@@ -3594,8 +3594,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f841846d6d01a2458c23c48762657cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 30
-  _damage: 20
+  <MaxHealth>k__BackingField: 100
+  _damage: 1
   _navMeshAgent: {fileID: 8608556831215286000}
   _animator: {fileID: 2746396951906470754}
   _characterController: {fileID: 8608556831215286001}

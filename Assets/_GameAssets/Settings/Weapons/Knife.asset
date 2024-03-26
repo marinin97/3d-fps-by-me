@@ -15,6 +15,6 @@ MonoBehaviour:
   <TotalAmmo>k__BackingField: 0
   <MagazineAmmo>k__BackingField: 0
   <HitDistance>k__BackingField: 1.5
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 100
   <ShootDelay>k__BackingField: 0.5
   <ReloadTime>k__BackingField: 0

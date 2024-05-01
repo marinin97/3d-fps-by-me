@@ -112,7 +112,7 @@ public class AssaultRifle : Weapon
                 targetPoint = hitInfo.point;
             }
 
-            Instantiate(_bulletPrefab, _shootPointTransform.position, Quaternion.identity)
+            Instantiate(_bulletPrefab, _shootPointTransform.position, Quaternion.Euler(_bulletPrefab.transform.rotation.eulerAngles))
                 .Shoot(WeaponSettings.Damage, targetPoint - _shootPointTransform.position);
 
             Debug.DrawRay(shootRay.origin, isHit ? hitInfo.point - shootRay.origin : shootRay.direction * WeaponSettings.HitDistance, isHit ? Color.green : Color.red, 2);
